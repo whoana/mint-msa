@@ -155,3 +155,6 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 
 
     =======> 여기까지 하면 서비스가 뜨네요;;;;;;;;; 하악하악
+    
+    드디어 깃에 올렸어
+    
