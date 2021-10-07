@@ -1,0 +1,15 @@
+server.shutdown=graceful
+
+#access log setting
+#server.tomcat.basedir=access-logs
+server.tomcat.accesslog.enabled=true
+server.tomcat.accesslog.pattern=%t %a %r %s (%D ms)
+
+
+#logging setting
+logging.level.org.springframework.web=debug
+logging.file.name=logs/mint-msa.log
+#logging.config=logback-spring.xml
+logging.config=logback.xml
+
+spring.mvc.log-request-details=true

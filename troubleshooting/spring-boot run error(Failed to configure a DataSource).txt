@@ -1,0 +1,63 @@
+[증상] 
+	최초 설치 후 실행 시 아래와 같은 오류 발생 
+	
+	./mvnw spring-boot:run
+	
+	***************************
+	APPLICATION FAILED TO START
+	***************************
+	
+	Description:
+	
+	Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
+	
+	Reason: Failed to determine a suitable driver class
+	
+	
+	Action:
+	
+	Consider the following:
+		If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.
+		If you have database settings to be loaded from a particular profile you may need to activate it (no profiles are currently active).
+
+[원인]
+	데이터베이스 자원을 사용하는 Dependency  추가시 자동으로 데이터소스를 찾기를  시도하게 되는데 이때 예외가 발생되는 문제 
+	
+[해결]
+	3가지 해결책 존재 (ref: https://hodolee246.tistory.com/9)
+	데이터베이스를 이용할 것이라면 2번 방법을 이용하라.
+	
+	1) Application.java 에 어노테이션 @SpringBootApplication 에 exclude= 문 추가 
+		@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+		
+	2)application.properties 및 application.yml 파일에 데이터 소스를 추가
+		properties
+		spring.datasource.url=
+		spring.datasource.username=
+		spring.datasource.password=
+		spring.datasource.driver-class-name=
+		
+		yml
+		spring:
+		  datasource:
+		    driver-class-name:
+		    url:
+		    username:
+		    password:
+	
+	3) Configuration 생성 (Bean을 이용하여 DB사용)
+		별도의 클래스를 생성해서 진행
+		@Configuration
+		public class DBConfiguration {
+			
+		    @Bean
+		    public DataSource datasource() {
+		      return DataSourceBuilder.create()
+		      .driverClassName("")
+		      .url("")
+		      .username("")
+		      .password("")
+		      .build(); 
+		    }
+		    
+		}

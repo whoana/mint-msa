@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/> <!-- 카멜케이스 적용 -->
+	</settings>
+
+	<!-- alias 등록 -->
+	<typeAliases>
+		<typeAlias type="pep.per.mint.common.data"/>
+		<typeAlias type="pep.per.mint.common.data.basic"/>
+		<typeAlias type="pep.per.mint.common.data.basic.email.Recipient" alias="ERecipient"/>
+		<typeAlias type="pep.per.mint.common.data.basic.sms.Recipient" alias="Recipient"/>
+		<typeAlias type="pep.per.mint.common.data.Interface" alias="OldInterface"/>
+		<typeAlias type="pep.per.mint.common.data.TRLog" alias="OldTRLog"/>
+		<typeAlias type="pep.per.mint.common.data.CommonCode" alias="OldCommonCode"/>
+	</typeAliases>
+</configuration>
