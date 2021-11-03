@@ -3,7 +3,11 @@ package pep.per.mint;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterConfig;
+
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -17,12 +21,20 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import pep.per.mint.common.data.basic.Interface;
+import pep.per.mint.database.service.co.CommonService;
+import pep.per.mint.front.filter.CORSFilter;
+
 @ImportResource("classpath:mint-context.xml")
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication(
+		scanBasePackages = "pep.per.mint",
+		exclude={DataSourceAutoConfiguration.class}
+)
 //@SpringBootApplication
 @RestController
 //@MapperScan("pep.per.mint.database.mapper")
@@ -34,6 +46,8 @@ public class MicroServiceApplication {
         return "Hello World!";
     }
 
+	
+	 
 
     //<beans:bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
 //	@Bean("restTemplate")

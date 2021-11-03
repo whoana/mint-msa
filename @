@@ -1,0 +1,1 @@
+java -DtestUploadPath=/Users/whoana/upload -jar ./target/mint-msa-0.0.1-SNAPSHOT-exec.jar

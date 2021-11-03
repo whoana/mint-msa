@@ -18,7 +18,6 @@ spring:
 #      instance:
 #        name: project t9
  
- 
     
  main:
   banner-mode: CONSOLE
