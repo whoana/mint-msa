@@ -3,6 +3,11 @@
 <%@page import="pep.per.mint.common.data.basic.ComMessage"%>
 <%@page import="pep.per.mint.front.controller.co.CommonController"%>
 <%@page import="org.springframework.web.servlet.FrameworkServlet"%>
+
+<!-- 신규추가 -->
+<%@page import="org.springframework.web.servlet.support.RequestContextUtils"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
+
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="pep.per.mint.common.data.basic.LoginInfo"%>
@@ -65,8 +70,11 @@ $(document).ready(function() {
 	//login service call
 	if( userid != null && userid != "" ) {
 		//REST Service Call
-		WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(application, FrameworkServlet.SERVLET_CONTEXT_PREFIX+"MintFrontWebAppServlet");
-		CommonController commonController = (CommonController) wac.getBean("commonController");
+		//WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(application, FrameworkServlet.SERVLET_CONTEXT_PREFIX+"MintFrontWebAppServlet");
+		//CommonController commonController = (CommonController) wac.getBean("commonController");
+		ApplicationContext ac = RequestContextUtils.findWebApplicationContext(request);
+		CommonController commonController = (CommonController) ac.getBean("commonController");
+		
 		try {
 			LoginInfo loginInfo = new LoginInfo();
 			loginInfo.setUserId(userid);

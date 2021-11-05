@@ -40,6 +40,11 @@
 <%@page import="org.springframework.web.servlet.FrameworkServlet"%>
 <!-- branch 추가코드  -->
 
+
+<!-- 신규추가 -->
+<%@page import="org.springframework.web.servlet.support.RequestContextUtils"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
+
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%
 	response.setContentType("text/javascript; charset=utf-8");
@@ -47,9 +52,16 @@
 	//servlet 2.5 spec 에서 getServletContext() 을 지원하지 않아 소스 변경, getServletContext() 메소드는 서블릿 스펙 3.0 부터 지원함.
 	//보통 servlet-api-xx.jar는 소스 배포시 WAS 서 제공한는 것을 배포하므로 배포 환경을 확인할 필요가 있다.
 	//20170814, 삼성전자에서 발견
-	WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(application, FrameworkServlet.SERVLET_CONTEXT_PREFIX+"MintFrontWebAppServlet");
-
-	AppManagementService appManagementService = (AppManagementService) wac.getBean("appManagementService");
+	//WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(application, FrameworkServlet.SERVLET_CONTEXT_PREFIX+"MintFrontWebAppServlet");
+	//AppManagementService appManagementService = (AppManagementService) wac.getBean("appManagementService");
+	
+	//20211104 spring-boot 버전으로 소스 변경 
+	ApplicationContext ac = RequestContextUtils.findWebApplicationContext(request);
+	AppManagementService appManagementService = (AppManagementService) ac.getBean("appManagementService");
+	
+	
+	
+	
 	Map responseObject = appManagementService.getMessagesByLangId( new HashMap());
 	//System.out.println("resultMap:" + Util.toJSONString(responseObject));
 

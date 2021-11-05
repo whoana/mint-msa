@@ -12,6 +12,10 @@
 <%@page import="pep.per.mint.common.util.Util"%>
 <%@page import="pep.per.mint.front.exception.ControllerException"%>
 <%@page import="pep.per.mint.front.controller.su.VersionController"%>
+<!-- 신규추가 -->
+<%@page import="org.springframework.web.servlet.support.RequestContextUtils"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
+
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@page import="org.springframework.web.servlet.FrameworkServlet"%>
@@ -29,8 +33,14 @@
 	<div id="errors"></div>
 </body>
 <%
-	WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(application, FrameworkServlet.SERVLET_CONTEXT_PREFIX+"MintFrontWebAppServlet");
-	VersionController vc = (VersionController) wac.getBean("versionController");
+	//WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(application, FrameworkServlet.SERVLET_CONTEXT_PREFIX+"MintFrontWebAppServlet");
+	//VersionController vc = (VersionController) wac.getBean("versionController");
+	
+	ApplicationContext ac = RequestContextUtils.findWebApplicationContext(request);
+	VersionController vc = (VersionController) ac.getBean("versionController");
+	
+	
+	
 	try {
 		ComMessage req = new ComMessage();
 		req.setAppId("version.jsp");

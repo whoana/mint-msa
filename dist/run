@@ -1,0 +1,2 @@
+mkdir upload
+java -DtestUploadPath=upload -jar mint-msa-0.0.1-SNAPSHOT-exec.jar --spring.config.location=config/ --spring.config.name=mint

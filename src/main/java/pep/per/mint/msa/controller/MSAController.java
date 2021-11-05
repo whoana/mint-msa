@@ -15,6 +15,13 @@ public class MSAController {
 	@Autowired
 	CommonService commonService;
 	
+	
+	@RequestMapping("/")
+	public String home(Model model) throws Exception {
+		 
+		return "/view/main/index.jsp";
+	}
+	
 	@RequestMapping("/interfaces")
 	public String getInterfaces(Model model) throws Exception {
 		

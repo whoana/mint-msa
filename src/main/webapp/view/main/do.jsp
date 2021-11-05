@@ -4,6 +4,11 @@
 <%@page import="org.springframework.web.servlet.FrameworkServlet"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
+
+<!-- 신규추가 -->
+<%@page import="org.springframework.web.servlet.support.RequestContextUtils"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
+			
 <%@page import="pep.per.mint.database.service.co.CommonService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
@@ -14,10 +19,15 @@
 	// 화면에 display 할 첫 페이지 지정(sso, login, index 등)
 	try{
 	String redirectPage = "";
-	WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(application, FrameworkServlet.SERVLET_CONTEXT_PREFIX+"MintFrontWebAppServlet");
-	CommonService commonService = (CommonService) wac.getBean("commonService");
-
+	
+	//WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(application, FrameworkServlet.SERVLET_CONTEXT_PREFIX+"MintFrontWebAppServlet");
+	//CommonService commonService = (CommonService) wac.getBean("commonService");
+	ApplicationContext ac = RequestContextUtils.findWebApplicationContext(request);
+	CommonService commonService = (CommonService) ac.getBean("commonService");
+	
 	try {
+		
+		
 		Map<String,List<String>> environmentalValues = commonService.getEnvironmentalValues("system","init.login.url");
 
 		if(environmentalValues == null || environmentalValues.size() == 0) {
@@ -30,6 +40,7 @@
 		}
 	} catch(Exception e) {
 		redirectPage = "./view/main/login.jsp";
+		e.printStackTrace();
 	}
 
 	String queryString = request.getQueryString();

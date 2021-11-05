@@ -1,6 +1,7 @@
-#server:
+server:
 #  port: 8090
-    
+  session:
+    timeout: 120    
 logging:
  config: logback.xml
  level:

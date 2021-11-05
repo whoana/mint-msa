@@ -1,5 +1,11 @@
 package pep.per.mint;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +13,8 @@ import javax.servlet.Filter;
 import javax.servlet.FilterConfig;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,15 +44,15 @@ import pep.per.mint.front.filter.CORSFilter;
 		exclude={DataSourceAutoConfiguration.class}
 )
 //@SpringBootApplication
-@RestController
+//@RestController
 //@MapperScan("pep.per.mint.database.mapper")
 @EnableCaching
 public class MicroServiceApplication {
 
-	@RequestMapping("/")
-    String home() {
-        return "Hello World!";
-    }
+//	@RequestMapping("/")
+//    String home() {
+//        return "Hello World!";
+//    }
 
 	
 	 
@@ -92,9 +100,56 @@ public class MicroServiceApplication {
 	}
 	*/
 
+	static Logger logger = LoggerFactory.getLogger(MicroServiceApplication.class);
+	
 	public static void main(String[] args) {
-
-
+		//System.getProperties().list(System.out);
+		logger.info("user.dir:" + System.getProperty("user.dir"));
+		logger.info("string boot entry point: main(String[] args)");
+		
+		String home = System.getProperty("user.dir");
+		File runscript = new File(home, "run");
+		BufferedInputStream bis = null;
+		if(runscript.exists()) {
+			try { 
+				 bis = new BufferedInputStream(new FileInputStream(runscript));
+				
+				int ch = 0;
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				do {
+					ch = bis.read();
+					baos.write(ch);
+				}while(ch != -1);
+				
+				String script = baos.toString();
+				logger.info("run script:\n"+ baos.toString());
+				if(!script.contains("JAVA_HOME")) {
+					logger.info("This script has no java home.");
+				}
+				
+				if(!script.contains("MINT_HOME")) {
+					logger.info("This script has no mint home.");
+				}
+				
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if(bis != null)
+					try {
+						bis.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			}
+		}
+		
+		for(String arg : args) {
+			logger.info(arg);
+		}
+		
 		//System.getenv().put("system.file.upload.path", "/Users/whoana/DEV/workspace-refactoring/mint-msa/upload");
 
 		SpringApplication sa = new SpringApplication(MicroServiceApplication.class);
