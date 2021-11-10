@@ -5,7 +5,7 @@ server:
 logging:
  config: logback.xml
  level:
-  root: debug
+  root: info
   
 spring:   
  application:

@@ -19,7 +19,7 @@ public class MSAController {
 	@RequestMapping("/")
 	public String home(Model model) throws Exception {
 		 
-		return "/view/main/index.jsp";
+		return "forward:/view/main/index.jsp";
 	}
 	
 	@RequestMapping("/interfaces")

@@ -124,7 +124,9 @@
         <beans:property name="defaultEncoding" value="UTF8"/>
         <beans:property name="maxInMemorySize" value="1024000"/>
         <beans:property name="maxUploadSize" value="20480000"/>
+        <!-- uploadTempDir 파라메터 설정시 spring-boot 에서 위치를 참조활수 없는지 FileNotFound 에러발생됨 .
         <beans:property name="uploadTempDir" value="./WEB-INF/uploadTemp"/>
+         -->
     </beans:bean>
 
     <beans:bean id="fileUploadController" class="pep.per.mint.front.controller.ut.FileUploadController"/>

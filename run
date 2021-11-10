@@ -1,1 +1,1 @@
-java -DtestUploadPath=/Users/whoana/upload -jar ./target/mint-msa-0.0.1-SNAPSHOT-exec.jar --spring.config.location=/Users/whoana/git/workspace-mint-msa/mint-msa/config/ --spring.config.name=mint
+java -DtestUploadPath=/Users/whoana/upload -jar ./target/mint-msa-0.0.1-SNAPSHOT-exec.war --spring.config.location=/Users/whoana/git/workspace-mint-msa/mint-msa/config/ --spring.config.name=mint
